@@ -1,6 +1,7 @@
 
 import { Mastra } from '@mastra/core/mastra';
 import { PinoLogger } from '@mastra/loggers';
+import { VercelDeployer }  from '@mastra/deployer-vercel';
 import { LibSQLStore } from '@mastra/libsql';
 import { weatherWorkflow } from './workflows/weather-workflow';
 import { weatherAgent } from './agents/weather-agent';
@@ -9,6 +10,7 @@ import { toolCallAppropriatenessScorer, completenessScorer, translationScorer } 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
   agents: { weatherAgent },
+  deployer: new VercelDeployer(),
   scorers: { toolCallAppropriatenessScorer, completenessScorer, translationScorer },
   logger: new PinoLogger({
     name: 'Mastra',
